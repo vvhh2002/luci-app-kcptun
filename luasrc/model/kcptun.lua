@@ -7,7 +7,7 @@ local uci  = require "luci.model.uci".cursor()
 local util = require "luci.util"
 local i18n = require "luci.i18n"
 
-module ("luci.model.kcptun", package.seeall)
+module("luci.model.kcptun", package.seeall)
 
 local kcptun_api = "https://api.github.com/repos/xtaci/kcptun/releases/latest"
 local luci_api = "https://api.github.com/repos/kuoruan/luci-app-kcptun/releases/latest"
@@ -284,7 +284,7 @@ function check_luci()
 end
 
 function download_kcptun(url)
-	if not download_url or download_url == "" then
+	if not url or url == "" then
 		return {
 			code = 1,
 			error = i18n.translate("Download url is required.")
@@ -294,7 +294,7 @@ function download_kcptun(url)
 	local tmp_file = util.trim(util.exec("mktemp -u"))
 	local command = "%s %s -O %s %s" % { wget, table.concat(wget_args, " "), tmp_file, url }
 
-	local result = sys.call(command) == "0"
+	local result = sys.call(command) == 0
 
 	if not result then
 		exec("/bin/rm", { "-f", tmp_file })

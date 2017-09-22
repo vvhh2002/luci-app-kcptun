@@ -124,10 +124,12 @@ local luci_version = kcp.get_luci_version()
 						if (json.update) {
 							eval(type + '_info = json');
 
+							add_remove_page_notice(false);
+							btn.disabled = false;
 							btn.value = '<%:Click to Update%>';
 							btn.placeholder = '<%:Click to Update%>';
 
-							btn.setAttribute('onclick', 'do_update("' + type + '", this);');
+							btn.setAttribute('onclick', 'do_' + type + '_update(this);');
 
 							if (detailElm) {
 								detailElm.innerHTML = createVersionUrl(json.version, json.url.html);
