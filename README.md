@@ -1,4 +1,5 @@
-# luci-app-kcptun
+# ---luci-app-kcptun---
+#luci-app-kcpraw
 
 Luci support for kcptun
 
@@ -18,10 +19,13 @@ cd openwrt
 git clone https://github.com/kuoruan/luci-app-kcptun.git feeds/luci/applications/luci-app-kcptun
 rm -rf tmp/
 
-./scripts/feeds update luci
-./scripts/feeds install luci
+----./scripts/feeds update luci---
+./scripts/feeds update -a
+----./scripts/feeds install luci----
+./scripts/feeds install -a
 
 make menuconfig
+make
 make package/luci-app-kcptun/{clean,compile} V=s
 ```
 
